@@ -1,0 +1,39 @@
+/*
+formsUI - 1.00 [03.10.14]
+Author: vadimsva
+Github: https://github.com/vadimsva/formsUI
+*/
+/* checkbox & radio */
+label {display:block;min-height:20px;font-weight:bold;line-height:20px;font-size:14px;margin:0;padding:7px 0}
+label *, :before, :after {box-sizing:border-box}
+.radio+.radio, .checkbox+.checkbox {margin-top:-5px}
+
+.radio input,
+.checkbox input {visibility:hidden;position:absolute}
+.radio label,
+.checkbox label {padding-left:0}
+.radio input+span,
+.checkbox input+span {position:relative;margin-right:5px;display:inline-block;float:left;width:20px;height:20px}
+.radio input+span:after {content:'';position:absolute;width:18px;height:18px;background:#fff;border:1px solid #bbb;border-radius:50%;top:2px}
+.radio input:checked+span:before {content:'';position:absolute;width:8px;height:8px;top:7px;left:5px;background:#2470b3;border-radius:50%;z-index:1}
+.radio input:hover+span:after {border-color:#999;box-shadow:0 0 0 3px rgba(218, 218, 218, 0.5)}
+.checkbox input+span:after {content:'';position:absolute;width:18px;height:18px;background:#fff;border:1px solid #bbb;border-radius:3px;top:2px}
+.checkbox input:checked+span:before {content:'\2714';position:absolute;top:7px;left:3px;color:#2470b3;font-size:13px;line-height:9px;z-index:1}
+.checkbox input:hover+span:after {border-color:#999;box-shadow:0 0 0 3px rgba(218, 218, 218, 0.5)}
+.checkbox.fillbox input:checked+span:before {content:'';width:10px;height:10px;top:6px;left:4px;background:#2470b3;border-radius:2px;z-index:1}
+
+.radio.disabled,
+.checkbox.disabled {color:#bbb}
+.radio.disabled input+span:after,
+.checkbox.disabled input+span:after {background:transparent;border-color:#ddd}
+.radio.disabled input:hover+span:after,
+.checkbox.disabled input:hover+span:after {border-color:#ddd!important;box-shadow:none!important}
+
+
+/* input */
+.form-control {display:block;width:100%;height:34px;padding:6px 12px;font-size:14px;line-height:20px;color:#333;border:1px solid #ccc;border-radius:4px;box-shadow:none!important;box-sizing:border-box}
+.form-control:hover {border-color:#aaa!important;box-shadow:0 0 0 3px rgba(218, 218, 218, 0.5)!important}
+.form-control:focus {border-color:#888!important;box-shadow:0 0 0 3px rgba(218, 218, 218, 1)!important}
+textarea.form-control {height:auto;resize:vertical}
+
+.form-control[disabled], .form-control[readonly] {cursor:default;background-color:#eee;border-color:#ccc!important;box-shadow:none!important}
