@@ -1,5 +1,5 @@
 /*
-formsUI - 1.00 [03.10.14]
+formsUI - 1.01 [12.11.14]
 Author: vadimsva
 Github: https://github.com/vadimsva/formsUI
 */
@@ -18,9 +18,12 @@ label *, :before, :after {box-sizing:border-box}
 .radio input:checked+span:before {content:'';position:absolute;width:8px;height:8px;top:7px;left:5px;background:#2470b3;border-radius:50%;z-index:1}
 .radio input:hover+span:after {border-color:#999;box-shadow:0 0 0 3px rgba(218, 218, 218, 0.5)}
 .checkbox input+span:after {content:'';position:absolute;width:18px;height:18px;background:#fff;border:1px solid #bbb;border-radius:3px;top:2px}
-.checkbox input:checked+span:before {content:'\2714';position:absolute;top:7px;left:3px;color:#2470b3;font-size:13px;line-height:9px;z-index:1}
+.checkbox input:checked+span:before,
+.checkbox.grayed input+span:before {content:'\2714';position:absolute;top:7px;left:3px;color:#2470b3;font-size:13px;line-height:9px;z-index:1}
 .checkbox input:hover+span:after {border-color:#999;box-shadow:0 0 0 3px rgba(218, 218, 218, 0.5)}
-.checkbox.fillbox input:checked+span:before {content:'';width:10px;height:10px;top:6px;left:4px;background:#2470b3;border-radius:2px;z-index:1}
+.checkbox.fillbox input:checked+span:before,
+.checkbox.fillbox.grayed input+span:before {content:'';width:10px;height:10px;top:6px;left:4px;background:#2470b3;border-radius:2px;z-index:1}
+.checkbox.grayed input+span:before {opacity:0.5}
 
 .radio.disabled,
 .checkbox.disabled {color:#bbb}
@@ -34,6 +37,23 @@ label *, :before, :after {box-sizing:border-box}
 .form-control {display:block;width:100%;height:34px;padding:6px 12px;font-size:14px;line-height:20px;color:#333;border:1px solid #ccc;border-radius:4px;box-shadow:none!important;box-sizing:border-box}
 .form-control:hover {border-color:#aaa!important;box-shadow:0 0 0 3px rgba(218, 218, 218, 0.5)!important}
 .form-control:focus {border-color:#888!important;box-shadow:0 0 0 3px rgba(218, 218, 218, 1)!important}
-textarea.form-control {height:auto;resize:vertical}
+
+.select {position:relative}
+.select .form-control+span {display:block;background:#fff;border-radius:0 4px 4px 0;position:absolute;top:1px;right:1px;bottom:1px;width:30px}
+.select .form-control+span:after {content:'';position:absolute;top:14px;right:12px;border:6px solid transparent;border-top-color:#555}
+
+textarea.form-control {height:auto;min-height:40px;resize:vertical}
 
 .form-control[disabled], .form-control[readonly] {cursor:default;background-color:#eee;border-color:#ccc!important;box-shadow:none!important}
+
+
+/* upload */
+.upload {}
+.upload label {display:inline-block;font-weight:normal}
+.upload input {display:none}
+.upload span {}
+
+
+/* button */
+.btn {cursor:pointer;background:#fff;border:1px solid #ccc;border-radius:4px;height:34px;padding:6px 12px;font-size:14px;line-height:20px}
+.btn:hover {background:#eee;border-color:#aaa}
