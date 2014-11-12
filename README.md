@@ -8,7 +8,7 @@ UI for style forms components
 
 
 <h4>Direct links to libs</h4>
-<a href="http://vadimsva.github.io/formsUI/formsUI.css" target="_blank"><b>formsUI.css</b></a> [2.4Kb]<br>
+<a href="http://vadimsva.github.io/formsUI/formsUI.css" target="_blank"><b>formsUI.css</b></a> [3.3Kb]<br>
 
 
 
