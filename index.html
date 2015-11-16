@@ -4,32 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>formsUI</title>
+<title>modalUI</title>
 <style>
-* {margin:0;font-family:sans-serif;outline:0}
-body {background:#fafafa}
-#page {background:#fff;border:1px solid #ccc;box-shadow:0 0 0 3px #eee;margin:40px auto;width:40%;min-width:800px;min-height:500px;border-radius:3px;position:relative}
-#page h2 {margin:20px;color:#444;margin-top:120px}
-#page #copyrightBlock + h2 {margin-top:20px}
-#copyrightBlock {position:absolute;top:10px;right:10px}
-#version, #gitHubLink {color:#fff;background:#4081BE;display:inline-block;padding:0 6px;border-radius:3px;text-decoration:none;font-size:12px;line-height:20px;margin-left:1px}
+* {margin:0;font-family:Roboto,sans-serif;outline:0;box-sizing:border-box;font-size:14px}
+body {background:#f1f1f1}
+#page {background:#fff;margin:60px auto;width:40%;min-width:800px;min-height:500px;position:relative;box-shadow:0 1px 5px #ccc}
+#pageCaption {position:absolute;top:-40px;font-size:24px;font-weight:500;line-height:24px}
+#copyrightBlock {position:absolute;top:-40px;right:0}
+#version, #gitHubLink {color:#fff;background:#4081BE;display:inline-block;padding:0 10px;border-radius:3px;text-decoration:none;font-size:12px;line-height:24px;margin-left:1px}
 #gitHubLink:hover {background:#3772A8}
-#version {background:#777}
-#version span {margin-left:10px;color:#ccc}
+#version {background:transparent;color:#555;font-weight:500}
+#version span {margin-left:10px;color:#999;font-size:12px}
 
-.exampleContainer {border:1px solid #ddd;border-left:0;border-right:0}
-.exampleContainer .exampleLive {padding:20px;background:#fafafa}
-.exampleContainer .exampleLive .exampleLiveTitle {color:#666;font-size:13px;padding-bottom:10px}
-.exampleContainer .exampleLive > button {padding:6px 12px;cursor:pointer;background:#4081BE;border:0;color:#fff;border-radius:3px;text-transform:uppercase;font-weight:bold;font-size:13px}
+.exampleContainer {margin-bottom:50px}
+.exampleContainer .exampleLive {border-top:0px solid #ddd;padding:20px;font-size:14px}
+.exampleContainer .exampleLive .exampleLiveTitle {border-left:5px solid #0084ff;margin:-20px -20px 20px;padding:10px 20px 10px 15px;font-size:20px;text-transform:uppercase}
+.exampleContainer .exampleLive > button {padding:6px 12px;cursor:pointer;background:#4081BE;border:0;color:#fff;border-radius:3px;text-transform:uppercase;font-weight:500;font-size:13px;line-height:20px}
 .exampleContainer .exampleLive > button:hover {background:#3772A8}
+.exampleContainer .exampleLive > label {display:block}
 .exampleContainer .exampleCode {background:#2b2f3b;padding:20px}
 .exampleContainer .exampleCode pre {line-height:0}
 .exampleContainer .exampleCode code {white-space:pre-line}
 .exampleContainer .exampleCode code * {font-family:consolas;font-size:13px}
-.exampleContainer .exampleCode code > p {line-height:20px;color:#7993ad;display:inline-block}
+.exampleContainer .exampleCode code br {line-height:20px}
+.exampleContainer .exampleCode code > p {line-height:20px;color:#7993ad;display:inline-block;margin:0}
 .exampleContainer .exampleCode code .tab {padding-left:15px}
 .exampleContainer .exampleCode code .tab2 {padding-left:30px}
 .exampleContainer .exampleCode code .tab3 {padding-left:45px}
+.exampleContainer .exampleCode code .tab4 {padding-left:60px}
 .exampleContainer .exampleCode code .tag {color:#97e0e9}
 .exampleContainer .exampleCode code .text {color:#fff}
 .exampleContainer .exampleCode code .key {color:#bf5c5b}
@@ -38,91 +40,575 @@ body {background:#fafafa}
 .exampleContainer .exampleCode code .var2 {color:#b297e9}
 
 .form-group {margin-bottom:15px}
+
+#page > pre {white-space:pre-line;padding:30px}
+
+
+.base_colors {display:flex;flex-wrap:wrap;margin:0 0 30px}
+.base_colors:after {content:'';clear:both;display:table}
+.base_colors > div {float:left;width:calc(100%/17);height:6px}
+
+
+#anim_box {position:absolute;background:#fff;width:300px;min-height:300px;border:1px solid #ccc;box-shadow:0 3px 6px rgba(0,0,0,0.3);z-index:1;opacity:0;display:none;padding:30px;margin-top:10px}
+#anim_box.active {display:block}
+
+.box {border:1px solid #ddd;padding:20px;margin-bottom:20px}
+
+
+@media (max-width: 840px){
+#page {width:auto;min-width:0;margin:20px 20px 100px}
+}
 </style>
-<link type="text/css" rel="stylesheet" href="formsUI.css">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
+<link type="text/css" rel="stylesheet" href="modalUI.css">
 </head>
 <body>
 
 <div id="page">
 
 	<div id="copyrightBlock">
-		<div id="version" title="Current version/date">1.01<span>[12.11.14]</span></div>
-		<a href="https://github.com/vadimsva/formsUI" id="gitHubLink">GitHub Repo</a>
+		<div id="version" title="Current version/date">1.06 beta<span>[16.11.15]</span></div>
+		<a href="https://github.com/vadimsva/modalUI" id="gitHubLink">GitHub Repo</a>
 	</div>
 
-	<h2>formsUI</h2>
+	<div id="pageCaption">modalUI</div>
+	
+	<div class="base_colors">
+		<div class="color1"></div>
+		<div class="color2"></div>
+		<div class="color3"></div>
+		<div class="color4"></div>
+		<div class="color5"></div>
+		<div class="color6"></div>
+		<div class="color7"></div>
+		<div class="color8"></div>
+		<div class="color9"></div>
+		<div class="color10"></div>
+		<div class="color11"></div>
+		<div class="color12"></div>
+		<div class="color13"></div>
+		<div class="color14"></div>
+		<div class="color15"></div>
+		<div class="color16"></div>
+		<div class="color17"></div>
+	</div>
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">text</div>
+			
+			<h1>Caption</h1>
+			<h2>Caption</h2>
+			<h3>Caption</h3>
+			<h4>Caption</h4>
+			<h5>Caption</h5>
+			<h6>Caption</h6>
+			<br>
+			
+			<p>text</p>
+			<p>text</p>
+			<br>
+			
+			<p><abbr title="This is help">text for help</abbr></p>
+			<br>
+			
+			<a href="/">Link</a>
+			<br><br>
+		
+			<a href="" class="link_animated">Link animated</a>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">h1</span>&gt;<span class="text">Caption</span>&lt;/<span class="tag">h1</span>&gt;</p>
+			<p>&lt;<span class="tag">h2</span>&gt;<span class="text">Caption</span>&lt;/<span class="tag">h2</span>&gt;</p>
+			<p>&lt;<span class="tag">h3</span>&gt;<span class="text">Caption</span>&lt;/<span class="tag">h3</span>&gt;</p>
+			<p>&lt;<span class="tag">h4</span>&gt;<span class="text">Caption</span>&lt;/<span class="tag">h4</span>&gt;</p>
+			<p>&lt;<span class="tag">h5</span>&gt;<span class="text">Caption</span>&lt;/<span class="tag">h5</span>&gt;</p>
+			<p>&lt;<span class="tag">h6</span>&gt;<span class="text">Caption</span>&lt;/<span class="tag">h6</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">p</span>&gt;<span class="text">text</span>&lt;/<span class="tag">p</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">abbr</span> <span class="key">title</span>=<span class="val">"This is help"</span>&gt;<span class="text">text for help</span>&lt;/<span class="tag">abbr</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">a</span> <span class="key">href</span>=<span class="val">"/"</span>&gt;<span class="text">Link</span>&lt;/<span class="tag">a</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">a</span> <span class="key">href</span>=<span class="val">"/"</span> <span class="key">class</span>=<span class="val">"link_animated"</span>&gt;<span class="text">Link animated</span>&lt;/<span class="tag">a</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">table</div>
+	
+			<div class="form-group">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>th</th>
+							<th>th</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>td</td>
+							<td>td</td>
+						</tr>
+						<tr>
+							<td>td</td>
+							<td>td</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="form-group">
+				<div class="table">
+					<div class="thead">
+						<div class="tr">
+							<div>th</div>
+							<div>th</div>
+						</div>
+					</div>
+					<div class="tbody">
+						<div class="tr">
+							<div>td</div>
+							<div>td</div>
+						</div>
+						<div class="tr">
+							<div>td</div>
+							<div>td</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">table</span> <span class="key">class</span>=<span class="val">"table"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">thead</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">tr</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">th</span>&gt;<span class="text">th</span>&lt;/<span class="tag">th</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">th</span>&gt;<span class="text">th</span>&lt;/<span class="tag">th</span>&gt;</p>
+			<p class="tab2">&lt;/<span class="tag">tr</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">thead</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">tbody</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">tr</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">td</span>&gt;<span class="text">td</span>&lt;/<span class="tag">td</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">td</span>&gt;<span class="text">td</span>&lt;/<span class="tag">td</span>&gt;</p>
+			<p class="tab2">&lt;/<span class="tag">tr</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">tbody</span>&gt;</p>
+			<p>&lt;/<span class="tag">table</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"table"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"thead"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tr"</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">div</span>&gt;<span class="text">th</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">div</span>&gt;<span class="text">th</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab2">&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tbody"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tr"</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">div</span>&gt;<span class="text">td</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab3">&lt;<span class="tag">div</span>&gt;<span class="text">td</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab2">&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">list</div>
+	
+			<div class="form-group">
+				<ul class="list">
+					<li>list</li>
+					<li>list</li>
+					<li>list</li>
+					<li>list</li>
+				</ul>
+			</div>
+
+			<div class="form-group">
+				<dl class="dl">
+					<dt>key</dt>
+					<dd>value</dd>
+					<dt>key</dt>
+					<dd>value</dd>
+				</dl>
+			</div>	
+
+			<div class="form-group">
+				<dl class="dl horizontal">
+					<dt>key</dt>
+					<dd>value</dd>
+					<dt>key</dt>
+					<dd>value</dd>
+				</dl>
+			</div>
+			
+
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">ul</span> <span class="key">class</span>=<span class="val">"list"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;<span class="text">list</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;<span class="text">list</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;<span class="text">list</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;<span class="text">list</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p>&lt;/<span class="tag">ul</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">dl</span> <span class="key">class</span>=<span class="val">"dl"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dt</span>&gt;<span class="text">key</span>&lt;/<span class="tag">dt</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dd</span>&gt;<span class="text">value</span>&lt;/<span class="tag">dd</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dt</span>&gt;<span class="text">key</span>&lt;/<span class="tag">dt</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dd</span>&gt;<span class="text">value</span>&lt;/<span class="tag">dd</span>&gt;</p>
+			<p>&lt;/<span class="tag">ul</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">dl</span> <span class="key">class</span>=<span class="val">"dl horizontal"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dt</span>&gt;<span class="text">key</span>&lt;/<span class="tag">dt</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dd</span>&gt;<span class="text">value</span>&lt;/<span class="tag">dd</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dt</span>&gt;<span class="text">key</span>&lt;/<span class="tag">dt</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">dd</span>&gt;<span class="text">value</span>&lt;/<span class="tag">dd</span>&gt;</p>
+			<p>&lt;/<span class="tag">ul</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">pagination</div>
+	
+			<div class="form-group">
+				<ul class="pagination">
+					<li class="active"><a>1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li class="notactive"><a>...</a></li>
+					<li><a>10</a></li>
+				</ul>
+			</div>
+			
+			<div class="form-group">
+				<ul class="pagination separate">
+					<li class="active"><a>1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li class="notactive"><a>...</a></li>
+					<li><a>10</a></li>
+				</ul>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">ul</span> <span class="key">class</span>=<span class="val">"pagination"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"active"</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">1</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">2</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">3</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"notactive"</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">...</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">10</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p>&lt;/<span class="tag">ul</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">ul</span> <span class="key">class</span>=<span class="val">"pagination separate"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"active"</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">1</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">2</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">3</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"notactive"</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">...</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span>&gt;<span class="text">10</span>&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p>&lt;/<span class="tag">ul</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">col</div>
+	
+			<div class="col">
+				<div class="col-45">
+					<div class="box">Column 45%</div>
+				</div>
+				<div class="col-25">
+					<div class="box">Column 25%</div>
+				</div>
+				<div class="col-30">
+					<div class="box">Column 30%</div>
+				</div>
+				<div class="col-20">
+					<div class="box">Column 20%</div>
+				</div>
+				<div class="col-30">
+					<div class="box">Column 30%</div>
+				</div>
+				<div class="col-50">
+					<div class="box">Column 50%</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"col"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"col-50"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">div</span>&gt;<span class="text">text</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"col-50"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">div</span>&gt;<span class="text">text</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">column</div>
+	
+			<div class="column column-3 border">
+			
+				<div class="box">
+					While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+				</div>
+				
+				<div class="box">
+					While working on one of my animations, I was surprised to find out that not 
+				</div>
+				
+				<div class="box">
+					While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+					While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+					While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+				</div>
+				
+				<div class="box">
+					While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+				</div>
+				
+				<div class="box">
+					While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+				</div>
+			
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"column column-3 border"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span>&gt;<span class="text">text</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span>&gt;<span class="text">text</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span>&gt;<span class="text">text</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span>&gt;<span class="text">text</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	
+	
+	
 	
 	<div class="exampleContainer">
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">checkbox</div>
 			
 			<label class="checkbox">
-				<input type="checkbox" checked><span></span> Checkbox
+				<input type="checkbox" checked><span></span> Checkbox checked
 			</label>
 			<label class="checkbox">
 				<input type="checkbox"><span></span> Checkbox
 			</label>
 			<label class="checkbox grayed">
-				<input type="checkbox"><span></span> Checkbox
+				<input type="checkbox"><span></span> Checkbox grayed
 			</label>
 			<label class="checkbox disabled">
-				<input type="checkbox" disabled><span></span> Checkbox
+				<input type="checkbox" checked disabled><span></span> Checkbox checked disabled
+			</label>
+			<label class="checkbox disabled">
+				<input type="checkbox" disabled><span></span> Checkbox disabled
 			</label>
 			
 		</div>
 		<div class="exampleCode"><pre><code>
 			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox checked</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox"</span>&gt;</p>
 			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox grayed"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox grayed</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox checked disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox disabled</span></p>
 			<p>&lt;/<span class="tag">label</span>&gt;</p>
 		</code></pre></div>
 	</div>
+	
 	
 	<div class="exampleContainer">
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">checkbox fill</div>
 			
 			<label class="checkbox fillbox">
-				<input type="checkbox" checked><span></span> Checkbox
+				<input type="checkbox" checked><span></span> Checkbox checked
 			</label>
 			<label class="checkbox fillbox">
 				<input type="checkbox"><span></span> Checkbox
 			</label>
 			<label class="checkbox fillbox grayed">
-				<input type="checkbox"><span></span> Checkbox
+				<input type="checkbox"><span></span> Checkbox grayed
 			</label>
 			<label class="checkbox fillbox disabled">
-				<input type="checkbox" disabled><span></span> Checkbox
+				<input type="checkbox" checked disabled><span></span> Checkbox checked disabled
+			</label>
+			<label class="checkbox fillbox disabled">
+				<input type="checkbox" disabled><span></span> Checkbox disabled
 			</label>
 			
 		</div>
 		<div class="exampleCode"><pre><code>
 			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox fillbox"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox checked</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox fillbox"</span>&gt;</p>
 			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox fillbox grayed"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox grayed</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox fillbox disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox checked disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"checkbox fillbox disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Checkbox disabled</span></p>
 			<p>&lt;/<span class="tag">label</span>&gt;</p>
 		</code></pre></div>
 	</div>
+	
 	
 	<div class="exampleContainer">
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">radio</div>
 			
 			<label class="radio">
-				<input type="radio" checked name="radio"><span></span> Radio
+				<input type="radio" checked name="radio"><span></span> Radio checked
 			</label>
 			<label class="radio">
 				<input type="radio" name="radio"><span></span> Radio
 			</label>
 			<label class="radio disabled">
-				<input type="radio" name="radio" disabled><span></span> Radio
+				<input type="radio" name="radio2" checked disabled><span></span> Radio checked disabled
+			</label>
+			<label class="radio disabled">
+				<input type="radio" name="radio" disabled><span></span> Radio disabled
 			</label>
 			
 		</div>
 		<div class="exampleCode"><pre><code>
 			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"radio"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"radio"</span> <span class="key">checked</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Radio checked</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"radio"</span>&gt;</p>
 			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"radio"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Radio</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"radio disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"radio"</span> <span class="key">checked disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Radio checked disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"radio disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"radio"</span> <span class="key">disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Radio disabled</span></p>
 			<p>&lt;/<span class="tag">label</span>&gt;</p>
 		</code></pre></div>
 	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">toggle</div>
+			
+			<label class="toggle left">
+				<input type="checkbox" checked><span></span> Toggle checked
+			</label>
+			<label class="toggle">
+				<input type="checkbox"><span></span> Toggle
+			</label>
+			<label class="toggle disabled">
+				<input type="checkbox" checked disabled><span></span> Toggle checked disabled
+			</label>
+			<label class="toggle disabled">
+				<input type="checkbox" disabled><span></span> Toggle disabled
+			</label>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle left"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle checked</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle checked disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">toggle fill</div>
+			
+			<label class="toggle fillbox">
+				<input type="checkbox" checked><span></span> Toggle checked
+			</label>
+			<label class="toggle fillbox">
+				<input type="checkbox"><span></span> Toggle
+			</label>
+			<label class="toggle fillbox disabled">
+				<input type="checkbox" checked disabled><span></span> Toggle checked disabled
+			</label>
+			<label class="toggle fillbox disabled">
+				<input type="checkbox" disabled><span></span> Toggle disabled
+			</label>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle fillbox"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle checked</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle fillbox"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle fillbox disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">checked disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle checked disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"toggle fillbox disabled"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"checkbox"</span> <span class="key">disabled</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt; <span class="text">Toggle disabled</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
 	
 	<div class="exampleContainer">
 		<div class="exampleLive">
@@ -138,11 +624,47 @@ body {background:#fafafa}
 				<input type="text" class="form-control" value="Text input" disabled>
 			</div>
 			
+			<div class="form-group">
+				<div class="form-control-container">
+					<label class="form-control-preffix">
+						<div>$</div>
+						<input type="text" class="form-control" value="Text input">
+					</label>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<div class="form-control-container">
+					<label class="form-control-syffix">
+						<div>$</div>
+						<input type="text" class="form-control" value="Text input">
+					</label>
+				</div>
+			</div>
+			
 		</div>
 		<div class="exampleCode"><pre><code>
 			<p>&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"text"</span> <span class="key">class</span>=<span class="val">"form-control"</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"text"</span> <span class="key">placeholder</span>=<span class="val">"text"</span> <span class="key">class</span>=<span class="val">"form-control"</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"text"</span> <span class="key">disabled</span> <span class="key">class</span>=<span class="val">"form-control"</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"form-control-container"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"form-control-preffix"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">div</span>&gt;<span class="text">$</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"text"</span> <span class="key">placeholder</span>=<span class="val">"text"</span> <span class="key">class</span>=<span class="val">"form-control"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">label</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"form-control-container"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"form-control-syffix"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">div</span>&gt;<span class="text">$</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"text"</span> <span class="key">placeholder</span>=<span class="val">"text"</span> <span class="key">class</span>=<span class="val">"form-control"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">label</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
 		</code></pre></div>
 	</div>
+	
 	
 	<div class="exampleContainer">
 		<div class="exampleLive">
@@ -153,7 +675,6 @@ body {background:#fafafa}
 					<select class="form-control">
 						<option>Select</option>
 					</select>
-					<span></span>
 				</div>
 			</div>
 			
@@ -164,6 +685,7 @@ body {background:#fafafa}
 			<p>&lt;/<span class="tag">select</span>&gt;</p>
 		</code></pre></div>
 	</div>
+	
 	
 	<div class="exampleContainer">
 		<div class="exampleLive">
@@ -179,27 +701,268 @@ body {background:#fafafa}
 		</code></pre></div>
 	</div>
 	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">button</div>
+			
+			<div class="form-group">
+				<button class="btn btn-primary">Button</button>
+				<button class="btn btn-default">Button</button>
+				<button class="btn btn-primary" disabled>Button</button>
+				<button class="btn btn-default" disabled>Button</button>
+				
+				<button class="btn btn-default btn-mini">Button</button>
+				<button class="btn btn-default btn-big">Button</button>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-primary"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default"</span> <span class="key">disabled</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-mini"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-big"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
 	<div class="exampleContainer">
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">file upload</div>
 			
 			<div class="form-group">
-				<span class="upload">
-					<label>
-						<input type="file">
-						<span class="btn">Upload</span>
-					</label>
-				</span>
+				
+				<label class="upload btn btn-default">
+					<input type="file" multiple="multiple">
+					Upload
+				</label>
+				
 			</div>
 			
 		</div>
 		<div class="exampleCode"><pre><code>
-			<p>&lt;<span class="tag">select</span> <span class="key">class</span>=<span class="val">"form-control"</span>&gt;</p>
-			<p class="tab">&lt;<span class="tag">option</span>&gt;<span class="text">Select</span>&lt;/<span class="tag">option</span>&gt;</p>
-			<p>&lt;/<span class="tag">select</span>&gt;</p>
+			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"upload btn btn-default"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"file"</span> <span class="key">multiple</span>=<span class="val">"multiple"</span>&gt;</p>
+			<p class="tab"><span class="text">Upload</span></p>
+			<p>&lt;/<span class="tag">label</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">dropdown menu</div>
+			
+			<div class="btn-dropdown-group">
+				<button class="btn btn-default btn-dropdown">Menu 1</button>
+				<ul class="dropdown-menu" data-closeonclick="true">
+					<li class="active">option</li>
+					<li>option</li>
+					<li class="disabled">option</li>
+					<li>option</li>
+					<li>option</li>
+					<li class="sep"></li>
+					<li>option</li>
+				</ul>
+			</div>
+			<div class="btn-dropdown-group">
+				<button class="btn btn-default btn-dropdown">Menu 2</button>
+				<ul class="dropdown-menu" data-closeonclick="true">
+					<li class="active">option</li>
+					<li>option</li>
+					<li class="disabled">option</li>
+					<li>option</li>
+					<li>option</li>
+					<li class="sep"></li>
+					<li>option</li>
+				</ul>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"btn-dropdown-group"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-dropdown"</span>&gt;<span class="text">Menu</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">ul</span> <span class="key">class</span>=<span class="val">"dropdown-menu"</span> <span class="key">data-closeonclick</span>=<span class="val">"true"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"active"</span>&gt;<span class="text">option</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">li</span>&gt;<span class="text">option</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"disabled"</span>&gt;<span class="text">option</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">li</span> <span class="key">class</span>=<span class="val">"sep"</span>&gt;&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">li</span>&gt;<span class="text">option</span>&lt;/<span class="tag">li</span>&gt;</p>
+			<p class="tab">&lt;/<span class="tag">ul</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">tabs</div>
+			
+			<div class="tabs_container animated">
+				<div class="tab active" data-tab="page1">Tab 1</div>
+				<div class="tab" data-tab="page2">Tab 2</div>
+				<div class="tab" data-tab="page3">Tab 3</div>
+			</div>
+			<div class="page_container">
+				<div class="page active" data-page="page1">
+					Page 1<br><br>
+					
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					<br><br>
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+				</div>
+				<div class="page" data-page="page2">
+					Page 2
+				</div>
+				<div class="page" data-page="page3">
+					Page 3
+				</div>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tabs_container"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tab active"</span> <span class="key">data-tab</span>=<span class="val">"page1"</span>&gt;<span class="text">Tab 1</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tab"</span> <span class="key">data-tab</span>=<span class="val">"page2"</span>&gt;<span class="text">Tab 2</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"tab"</span> <span class="key">data-tab</span>=<span class="val">"page3"</span>&gt;<span class="text">Tab 3</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"page_container"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"page active"</span> <span class="key">data-page</span>=<span class="val">"page1"</span>&gt;<span class="text">Page 1</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"page"</span> <span class="key">data-page</span>=<span class="val">"page2"</span>&gt;<span class="text">Page 2</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"page"</span> <span class="key">data-page</span>=<span class="val">"page3"</span>&gt;<span class="text">Page 3</span>&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">accordion</div>
+			
+			<div class="accordion_container" data-toggle="true">
+				<div class="accordion_block active">
+					<div class="accordion_header">Block 1</div>
+					<div class="accordion_body">
+						Page 1
+					</div>
+				</div>
+				<div class="accordion_block">
+					<div class="accordion_header">Block 2</div>
+					<div class="accordion_body">
+						2-----Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					</div>
+				</div>
+				<div class="accordion_block">
+					<div class="accordion_header">Block 3</div>
+					<div class="accordion_body">
+						3-----Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+						Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">progress</div>
+	
+			<div class="form-group">
+				<div id="prg" class="progress"></div>
+				<br><button class="btn btn-primary btn-mini" onclick="prg()">Start progress</button>
+			</div>
+			
+			<div class="form-group">
+				<div class="progress mini">
+					<div class="progress_bar" style="width:50%"></div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="progress mini infinite">
+					<div class="progress_bar"></div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			
+		</code></pre></div>
+	</div>
+	
+	
+	<div class="exampleContainer">
+		<div class="exampleLive">
+			<div class="exampleLiveTitle">animation</div>
+			
+			<div class="col">
+				<div class="col-40">
+					<select id="anim_effect" class="form-control">
+						<option value="fadeInLeft" selected>fadeInLeft</option>
+						<option value="fadeInRight">fadeInRight</option>
+						<option value="fadeInTop">fadeInTop</option>
+						<option value="fadeInTopBig">fadeInTopBig</option>
+						<option value="fadeInBottom">fadeInBottom</option>
+						<option value="scaleIn">scaleIn</option>
+						<option value="slideIn">slideIn</option>
+					</select>
+				</div>
+				<div class="col-60">
+					<button id="anim_run" class="btn btn-primary">run</button>
+					<button id="anim_reset" class="btn btn-default">reset</button>
+					<div id="anim_box">
+						<h5>CSS Animation Tricks: State Jumping, Negative Delays, Animating Origin, and More</h5>
+						While working on one of my animations, I was surprised to find out that not only can transformation-origin be changed mid-animation, it is also animatable! In the example below, this allows us to create one animation using rotations on different axes instead of using four separate animations.
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="exampleCode"><pre><code>
+			
 		</code></pre></div>
 	</div>
 
+
+<pre style="display:none">	
+css
+1. анимация клика в любом месте на элемент (angular material design)
+
+select
+1. сделать возможность создания селекта из стандартного, если прописан класс, создается элемент списка и на него передается управление от стандартного селекта, который скрывается
+
+http://getuikit.com/docs/scrollspy.html
+http://getuikit.com/docs/upload.html
+
+</pre>	
+	
+	
+	
+	
+	
 </div>
+
+<script src="http://cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+<script src="modalUI.js"></script>
+
+
 </body>
 </html>
