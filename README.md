@@ -1,14 +1,14 @@
-formsUI
+modalUI
 =======
 
 UI for style forms components
 
 
-<a href="http://vadimsva.github.io/formsUI/" target="_blank"><b>DEMO</b></a>
+<a href="http://vadimsva.github.io/modalUI/" target="_blank"><b>DEMO</b></a>
 
 
 <h4>Direct links to libs</h4>
-<a href="http://vadimsva.github.io/formsUI/formsUI.css" target="_blank"><b>formsUI.css</b></a> [3.3Kb]<br>
+<a href="http://vadimsva.github.io/formsUI/modalUI.css" target="_blank"><b>modalUI.css</b></a> [18Kb]<br>
 
 
 
