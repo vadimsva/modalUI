@@ -8,7 +8,7 @@ UI for style forms components
 
 
 <h4>Direct links to libs</h4>
-<a href="http://vadimsva.github.io/formsUI/modalUI.css" target="_blank"><b>modalUI.css</b></a> [18Kb]<br>
+<a href="http://vadimsva.github.io/modalUI/modalUI.css" target="_blank"><b>modalUI.css</b></a> [18Kb]<br>
 
 
 
