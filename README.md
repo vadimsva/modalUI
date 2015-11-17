@@ -1,7 +1,7 @@
 modalUI
 =======
 
-UI for style forms components
+UI framework
 
 
 <a href="http://vadimsva.github.io/modalUI/" target="_blank"><b>DEMO</b></a>
