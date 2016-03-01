@@ -8,20 +8,26 @@
 <style>
 * {margin:0;font-family:Roboto,sans-serif;outline:0;box-sizing:border-box;font-size:14px}
 body {background:#f1f1f1}
-#page {background:#fff;margin:60px auto;width:40%;min-width:800px;min-height:500px;position:relative;box-shadow:0 1px 5px #ccc}
-#pageCaption {position:absolute;top:-40px;font-size:24px;font-weight:500;line-height:24px}
-#copyrightBlock {position:absolute;top:-40px;right:0}
-#version, #gitHubLink {color:#fff;background:#4081BE;display:inline-block;padding:0 10px;border-radius:3px;text-decoration:none;font-size:12px;line-height:24px;margin-left:1px}
-#gitHubLink:hover {background:#3772A8}
+#page {margin:30px auto 100px;width:40%;min-width:800px;min-height:500px}
+#page_content {background:#fff;box-shadow:0 1px 5px #ccc;margin-top:20px;padding-bottom:200px}
+#pageCaption {font-size:24px;font-weight:500;line-height:24px}
+#pageDesc {color:#777;margin-top:5px;font-size:90%}
+
+#copyrightBlock {float:right}
+#version, #gitHubLink, #downloadLink {color:#fff;background:#4081BE;display:inline-block;padding:0 10px;border-radius:3px;text-decoration:none;font-size:12px;line-height:24px;margin-left:1px}
+#downloadLink:hover {background:#3772A8}
+#gitHubLink {background:#ccc;color:#555;font-weight:500}
+#gitHubLink:hover {background:#aaa;color:#333}
 #version {background:transparent;color:#555;font-weight:500}
 #version span {margin-left:10px;color:#999;font-size:12px}
 
 .exampleContainer {margin-bottom:50px}
-.exampleContainer .exampleLive {border-top:0px solid #ddd;padding:20px;font-size:14px}
+.exampleContainer .exampleLive {padding:20px;font-size:14px}
+.exampleContainer .exampleLive:after {content:'';clear:both;display:table}
 .exampleContainer .exampleLive .exampleLiveTitle {border-left:5px solid #0084ff;margin:-20px -20px 20px;padding:10px 20px 10px 15px;font-size:20px;text-transform:uppercase}
 .exampleContainer .exampleLive > button {padding:6px 12px;cursor:pointer;background:#4081BE;border:0;color:#fff;border-radius:3px;text-transform:uppercase;font-weight:500;font-size:13px;line-height:20px}
 .exampleContainer .exampleLive > button:hover {background:#3772A8}
-.exampleContainer .exampleLive > label {display:block}
+
 .exampleContainer .exampleCode {background:#2b2f3b;padding:20px}
 .exampleContainer .exampleCode pre {line-height:0}
 .exampleContainer .exampleCode code {white-space:pre-line}
@@ -59,19 +65,22 @@ body {background:#f1f1f1}
 #page {width:auto;min-width:0;margin:20px 20px 100px}
 }
 </style>
-<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700">
 <link type="text/css" rel="stylesheet" href="modalUI.css">
 </head>
-<body>
+<body class="material1">
 
 <div id="page">
 
 	<div id="copyrightBlock">
-		<div id="version" title="Current version/date">1.06 beta<span>[16.11.15]</span></div>
+		<div id="version" title="Current version/date">1.07 beta<span>[01.03.16]</span></div>
 		<a href="https://github.com/vadimsva/modalUI" id="gitHubLink">GitHub Repo</a>
 	</div>
 
 	<div id="pageCaption">modalUI</div>
+	<div id="pageDesc">UI framework</div>
+	
+	<div id="page_content">
 	
 	<div class="base_colors">
 		<div class="color1"></div>
@@ -97,16 +106,16 @@ body {background:#f1f1f1}
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">text</div>
 			
-			<h1>Caption</h1>
-			<h2>Caption</h2>
-			<h3>Caption</h3>
-			<h4>Caption</h4>
-			<h5>Caption</h5>
-			<h6>Caption</h6>
+			<h1>h1 Caption</h1>
+			<h2>h2 Caption</h2>
+			<h3>h3 Caption</h3>
+			<h4>h4 Caption</h4>
+			<h5>h5 Caption</h5>
+			<h6>h6 Caption</h6>
 			<br>
 			
-			<p>text</p>
-			<p>text</p>
+			<p>p Text</p>
+			<p>p Text</p>
 			<br>
 			
 			<p><abbr title="This is help">text for help</abbr></p>
@@ -410,7 +419,7 @@ body {background:#f1f1f1}
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">checkbox</div>
 			
-			<label class="checkbox">
+			<label class="checkbox label-block">
 				<input type="checkbox" checked><span></span> Checkbox checked
 			</label>
 			<label class="checkbox">
@@ -538,7 +547,7 @@ body {background:#f1f1f1}
 		<div class="exampleLive">
 			<div class="exampleLiveTitle">toggle</div>
 			
-			<label class="toggle left">
+			<label class="toggle left wave">
 				<input type="checkbox" checked><span></span> Toggle checked
 			</label>
 			<label class="toggle">
@@ -615,6 +624,7 @@ body {background:#f1f1f1}
 			<div class="exampleLiveTitle">input</div>
 			
 			<div class="form-group">
+				<label>Label</label>
 				<input type="text" class="form-control" value="Text input">
 			</div>
 			<div class="form-group">
@@ -641,6 +651,14 @@ body {background:#f1f1f1}
 					</label>
 				</div>
 			</div>
+			
+			<div class="form-group animated">
+				<label>Label
+					<input type="text" class="form-control" placeholder="Text input">
+					<span></span>
+				</label>
+			</div>
+			
 			
 		</div>
 		<div class="exampleCode"><pre><code>
@@ -709,20 +727,44 @@ body {background:#f1f1f1}
 			<div class="form-group">
 				<button class="btn btn-primary">Button</button>
 				<button class="btn btn-default">Button</button>
+				&nbsp;&nbsp;
 				<button class="btn btn-primary" disabled>Button</button>
 				<button class="btn btn-default" disabled>Button</button>
-				
+				&nbsp;&nbsp;
+				<button class="btn btn-primary btn-upper">Button</button>
+				<button class="btn btn-default btn-upper">Button</button>
+				&nbsp;&nbsp;
 				<button class="btn btn-default btn-mini">Button</button>
 				<button class="btn btn-default btn-big">Button</button>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-float">+</button>
+				<button class="btn btn-default btn-float">+</button>
+				&nbsp;&nbsp;
+				<button class="btn btn-primary btn-float" disabled>+</button>
+				<button class="btn btn-default btn-float" disabled>+</button>
+				&nbsp;&nbsp;
+				<button class="btn btn-default btn-float btn-mini">+</button>
+				<button class="btn btn-default btn-float btn-big">+</button>
 			</div>
 			
 		</div>
 		<div class="exampleCode"><pre><code>
 			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-primary"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
 			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-primary"</span> <span class="key">disabled</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
 			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default"</span> <span class="key">disabled</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-primary btn-upper"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-upper"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
 			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-mini"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
 			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-big"</span>&gt;<span class="text">Button</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-primary btn-float"</span>&gt;<span class="text">+</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-float"</span>&gt;<span class="text">+</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-primary btn-float"</span> <span class="key">disabled</span>&gt;<span class="text">+</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-default btn-float"</span> <span class="key">disabled</span>&gt;<span class="text">+</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-none btn-float btn-mini"</span>&gt;<span class="text">+</span>&lt;/<span class="tag">button</span>&gt;</p>
+			<p>&lt;<span class="tag">button</span> <span class="key">class</span>=<span class="val">"btn btn-none btn-float btn-big"</span>&gt;<span class="text">+</span>&lt;/<span class="tag">button</span>&gt;</p>
 		</code></pre></div>
 	</div>
 	
@@ -733,19 +775,46 @@ body {background:#f1f1f1}
 			
 			<div class="form-group">
 				
-				<label class="upload btn btn-default">
-					<input type="file" multiple="multiple">
-					Upload
-				</label>
+				<div class="upload_container">
+					<label class="upload btn btn-default">
+						<input type="file" multiple="multiple" id="upload">
+						Upload
+					</label>
+					<div class="uploaded_files"></div>
+				</div>
+			
+			</div>
+			<div class="form-group">
+				
+				<textarea class="form-control upload_mask"></textarea>
+				<div class="upload_container">
+					<label class="upload btn btn-none">
+						<input type="file" multiple="multiple">
+						+ Upload
+					</label>
+					<div class="uploaded_files"></div>
+				</div>
 				
 			</div>
 			
 		</div>
 		<div class="exampleCode"><pre><code>
-			<p>&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"upload btn btn-default"</span>&gt;</p>
-			<p class="tab">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"file"</span> <span class="key">multiple</span>=<span class="val">"multiple"</span>&gt;</p>
-			<p class="tab"><span class="text">Upload</span></p>
-			<p>&lt;/<span class="tag">label</span>&gt;</p>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"upload_container"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"upload btn btn-default"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"file"</span> <span class="key">multiple</span>=<span class="val">"multiple"</span>&gt;</p>
+			<p class="tab2"><span class="text">Upload</span></p>
+			<p class="tab">&lt;/<span class="tag">label</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"uploaded_files"</span>&gt;&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
+			<br>
+			<p>&lt;<span class="tag">textarea</span> <span class="key">class</span>=<span class="val">"form-control upload_mask"</span>&gt;&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"upload_container"</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">label</span> <span class="key">class</span>=<span class="val">"upload btn btn-default"</span>&gt;</p>
+			<p class="tab2">&lt;<span class="tag">input</span> <span class="key">type</span>=<span class="val">"file"</span> <span class="key">multiple</span>=<span class="val">"multiple"</span>&gt;</p>
+			<p class="tab2"><span class="text">Upload</span></p>
+			<p class="tab">&lt;/<span class="tag">label</span>&gt;</p>
+			<p class="tab">&lt;<span class="tag">div</span> <span class="key">class</span>=<span class="val">"uploaded_files"</span>&gt;&lt;/<span class="tag">div</span>&gt;</p>
+			<p>&lt;/<span class="tag">div</span>&gt;</p>
 		</code></pre></div>
 	</div>
 	
@@ -803,6 +872,34 @@ body {background:#f1f1f1}
 				<div class="tab active" data-tab="page1">Tab 1</div>
 				<div class="tab" data-tab="page2">Tab 2</div>
 				<div class="tab" data-tab="page3">Tab 3</div>
+			</div>
+			<div class="page_container">
+				<div class="page active" data-page="page1">
+					Page 1<br><br>
+					
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					<br><br>
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+					Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.
+				</div>
+				<div class="page" data-page="page2">
+					Page 2
+				</div>
+				<div class="page" data-page="page3">
+					Page 3
+				</div>
+			</div>
+			
+			<div class="tabs_container slider">
+				<div class="tab active" data-tab="page1">Tab 1</div>
+				<div class="tab" data-tab="page2">Tab big text</div>
+				<div class="tab" data-tab="page3">Tab 3</div>
+				
 			</div>
 			<div class="page_container">
 				<div class="page active" data-page="page1">
@@ -916,13 +1013,17 @@ body {background:#f1f1f1}
 			<div class="col">
 				<div class="col-40">
 					<select id="anim_effect" class="form-control">
-						<option value="fadeInLeft" selected>fadeInLeft</option>
+						<option value="fadeIn" selected>fadeIn</option>
+						<option value="fadeInLeft">fadeInLeft</option>
 						<option value="fadeInRight">fadeInRight</option>
 						<option value="fadeInTop">fadeInTop</option>
 						<option value="fadeInTopBig">fadeInTopBig</option>
 						<option value="fadeInBottom">fadeInBottom</option>
 						<option value="scaleIn">scaleIn</option>
 						<option value="slideIn">slideIn</option>
+						<option value="slideInLeft">slideInLeft</option>
+						<option value="slideInRight">slideInRight</option>
+						<option value="bubbleIn">bubbleIn</option>
 					</select>
 				</div>
 				<div class="col-60">
@@ -941,26 +1042,12 @@ body {background:#f1f1f1}
 		</code></pre></div>
 	</div>
 
-
-<pre style="display:none">	
-css
-1. анимация клика в любом месте на элемент (angular material design)
-
-select
-1. сделать возможность создания селекта из стандартного, если прописан класс, создается элемент списка и на него передается управление от стандартного селекта, который скрывается
-
-http://getuikit.com/docs/scrollspy.html
-http://getuikit.com/docs/upload.html
-
-</pre>	
 	
-	
-	
-	
+	</div>
 	
 </div>
 
-<script src="http://cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://cdn.jsdelivr.net/jquery/3.0.0-beta1/jquery.min.js"></script>
 <script src="modalUI.js"></script>
 
 
